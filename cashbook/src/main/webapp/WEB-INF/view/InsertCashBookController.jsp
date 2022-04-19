@@ -9,8 +9,6 @@
 	System.out.println(cashbookDate);
 	
 	request.setAttribute("cashbookDate", cashbookDate);
-	
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -57,9 +55,7 @@
 					<a class="btn btn-dark" href="<%=request.getContextPath()%>/CashBookListByMonthController?y=<%=y%>&m=<%=m%>">뒤로</a>
 				</td>
 			</tr>
-			
 		</table>
-		
 	</form>
 </div>
 </body>

@@ -22,31 +22,30 @@ public class InsertCashBookController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/InsertCashBookController.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1) request 분석(C)
-		request.setCharacterEncoding("utf-8");
-		String cashbookDate = request.getParameter("cashbookDate");
-		int cash = Integer.parseInt(request.getParameter("cash"));
-		String kind = request.getParameter("kind");
-		String memo = request.getParameter("memo");
+	// 1) request 분석(C)
+	request.setCharacterEncoding("utf-8");
+	String cashbookDate = request.getParameter("cashbookDate");
+	int cash = Integer.parseInt(request.getParameter("cash"));
+	String kind = request.getParameter("kind");
+	String memo = request.getParameter("memo");
+	
+	// 디버깅
+	System.out.println(cashbookDate);
+	System.out.println(cash);
+	System.out.println(kind);
+	System.out.println(memo);
+	
+	// 2) 메서드
+	Cashbook cashbook = new Cashbook();
+	cashbook.setCashDate(cashbookDate);
+	cashbook.setCash(cash);
+	cashbook.setKind(kind);
+	cashbook.setMemo(memo);
 		
-		// 디버깅
-		System.out.println(cashbookDate);
-		System.out.println(cash);
-		System.out.println(kind);
-		System.out.println(memo);
-		
-		// 2) 메서드
-		Cashbook cashbook = new Cashbook();
-		cashbook.setCashDate(cashbookDate);
-		cashbook.setCash(cash);
-		cashbook.setKind(kind);
-		cashbook.setMemo(memo);
-		
-		CashbookDao cashbookDao = new CashbookDao();
-		cashbookDao.insertCashbookAction(cashbook);
-		
-		// 원래있던곳으로 돌아가기
-		response.sendRedirect(request.getContextPath()+"/CashBookListByMonthController");
+	CashbookDao cashbookDao = new CashbookDao();
+	cashbookDao.insertCashbookAction(cashbook);
+	
+	// 원래있던곳으로 돌아가기
+	response.sendRedirect(request.getContextPath()+"/CashBookListByMonthController");
 	}
-
 }

@@ -77,30 +77,30 @@ public class CashbookDao {
 	 VALUES ('?2022-03-14', '?', ?, 'NOW()', 'NOW()', '?');
 	*/
 	String sql ="insert into cashbook (cash_date, kind, cash, memo, update_date, create_date) VALUES (?, ?, ?, ?, NOW(), NOW());";
-	try {
-		Class.forName("org.mariadb.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
-		stmt = conn.prepareStatement(sql);
-		System.out.println("sql insertCashbook : " + stmt);	//디버깅
-		stmt.setString(1, cashbook.getCashDate());
-		stmt.setString(2, cashbook.getKind());
-		stmt.setInt(3, cashbook.getCash());
-		stmt.setString(4, cashbook.getMemo());
-		int row = stmt.executeUpdate();
-		if(row == 1) { // 디버깅
-			System.out.println("입력성공");
-		} else {
-			System.out.println("입력실패");
-		}
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
 		try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			System.out.println("sql insertCashbook : " + stmt);	//디버깅
+			stmt.setString(1, cashbook.getCashDate());
+			stmt.setString(2, cashbook.getKind());
+			stmt.setInt(3, cashbook.getCash());
+			stmt.setString(4, cashbook.getMemo());
+			int row = stmt.executeUpdate();
+			if(row == 1) { // 디버깅
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-	}
 	}
 }
