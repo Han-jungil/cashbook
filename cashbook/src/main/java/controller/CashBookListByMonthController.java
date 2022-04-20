@@ -73,7 +73,6 @@ public class CashBookListByMonthController extends HttpServlet {
 		// 4)
 		int totalTd = startBlank + endDay + endBlank;
 		
-		
 		// 2) 모델값(월별 가계부 리스트)을 반환하는 비지니스로직(모델) 호출
 		CashbookDao cashbookDao = new CashbookDao();
 		List<Map<String, Object>> list = cashbookDao.selectCashbookListByMonth(y, m);

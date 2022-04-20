@@ -19,8 +19,19 @@ import dao.*;
 @WebServlet("/InsertCashBookController")
 public class InsertCashBookController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		String y = request.getParameter("y");
+		String m = request.getParameter("m");
+		String d = request.getParameter("d");
+		String cashbookDate = y + "-" + m + "-" + d;
+		System.out.println("insertBefore" + cashbookDate);
+		request.setAttribute("cashbookDate", cashbookDate);
+		request.setAttribute("y", y);
+		request.setAttribute("m", m);
+		
 		request.getRequestDispatcher("/WEB-INF/view/InsertCashBookController.jsp").forward(request, response);
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	// 1) request 분석(C)
 	request.setCharacterEncoding("utf-8");
@@ -28,6 +39,7 @@ public class InsertCashBookController extends HttpServlet {
 	int cash = Integer.parseInt(request.getParameter("cash"));
 	String kind = request.getParameter("kind");
 	String memo = request.getParameter("memo");
+	
 	
 	// 디버깅
 	System.out.println(cashbookDate);
