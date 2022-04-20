@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +9,7 @@
 <body>
 	<div class="container">	
 	<h1>일정 입력</h1>
-	<form method="post" action= "<%=request.getContextPath()%>/InsertCashBookController">
+	<form method="post" action= "<%=request.getContextPath()%>/InsertCashbookController">
 		<table class="table">
 			<tr>
 				<td>cashbookDate</td>
@@ -44,7 +41,7 @@
 			<tr>
 				<td>
 					<button type="submit" class="btn-dark">입력</button>
-					<a class="btn btn-dark" href="<%=request.getContextPath()%>/CashBookListByMonthController?y=<%=(String)request.getAttribute("y")%>&m=<%=(String)request.getAttribute("m")%>">뒤로</a>
+					<a class="btn btn-dark" href="<%=request.getContextPath()%>/CashbookListByMonthController?y=<%=(String)request.getAttribute("y")%>&m=<%=(String)request.getAttribute("m")%>">뒤로</a>
 				</td>
 			</tr>
 		</table>

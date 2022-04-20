@@ -16,8 +16,8 @@ import dao.*;
 /**
  * Servlet implementation class InsertCashBookController
  */
-@WebServlet("/InsertCashBookController")
-public class InsertCashBookController extends HttpServlet {
+@WebServlet("/InsertCashbookController")
+public class InsertCashbookController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String y = request.getParameter("y");
@@ -29,7 +29,7 @@ public class InsertCashBookController extends HttpServlet {
 		request.setAttribute("y", y);
 		request.setAttribute("m", m);
 		
-		request.getRequestDispatcher("/WEB-INF/view/InsertCashBookController.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/InsertCashbookController.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,17 +47,38 @@ public class InsertCashBookController extends HttpServlet {
 	System.out.println(kind);
 	System.out.println(memo);
 	
-	// 2) 메서드
+	// 2) 모델값 넣기
 	Cashbook cashbook = new Cashbook();
 	cashbook.setCashDate(cashbookDate);
 	cashbook.setCash(cash);
 	cashbook.setKind(kind);
 	cashbook.setMemo(memo);
 		
-	CashbookDao cashbookDao = new CashbookDao();
-	cashbookDao.insertCashbookAction(cashbook);
+	//Hashtag
+    List<String> hashtag = new ArrayList<>();
+    String memo2 = memo.replace("#", " #");
+    String[] arr = memo2.split(" ");
+    for(String s : arr) {
+       if(s.startsWith("#")) {
+          String temp = s.replace("#", "");
+          if(temp.length()>0) {
+             hashtag.add(temp);
+          }
+       }
+    }
+    
+	// 디버깅
+	System.out.println(hashtag.size() +"<-- hashtagSzieInsertCashbookController.doPost()");
+	    for(String h : hashtag) {
+	       System.out.println(h + " <-- hashtag InsertCashbookController.doPost()");
+	    }
 	
-	// 원래있던곳으로 돌아가기
-	response.sendRedirect(request.getContextPath()+"/CashBookListByMonthController");
+	// 메서드
+	CashbookDao cashbookDao = new CashbookDao();
+	cashbookDao.insertCashbookAction(cashbook, hashtag);
+		
+	// 원래있던곳으로 돌아가기(뷰로 돌아가기)
+	response.sendRedirect(request.getContextPath()+"/CashbookListByMonthController");
+		
 	}
 }

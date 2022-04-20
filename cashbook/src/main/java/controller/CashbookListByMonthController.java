@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CashbookDao;
 
-@WebServlet("/CashBookListByMonthController")
-public class CashBookListByMonthController extends HttpServlet {
+@WebServlet("/CashbookListByMonthController")
+public class CashbookListByMonthController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1) 월별 가계부 리스트 요청 분석
 		Calendar now = Calendar.getInstance(); // ex) 2022.04.19
@@ -88,7 +88,7 @@ public class CashBookListByMonthController extends HttpServlet {
 		request.setAttribute("y", y);
 		request.setAttribute("m", m);
 		// 3) 뷰 포워딩
-		request.getRequestDispatcher("/WEB-INF/view/CashBookListByMonthController.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/CashbookListByMonthController.jsp").forward(request, response);
 	}
 
 }

@@ -25,19 +25,19 @@
 		int endBlank = (Integer)request.getAttribute("endBlank");
 		int totalTd = (Integer)request.getAttribute("totalTd");
 		
-		System.out.println(list.size() +" <- list.size() CaahBookListByMonth.jsp");
-		System.out.println(y +" <- y CaahBookListByMonth.jsp");
-		System.out.println(m +" <- m CaahBookListByMonth.jsp");
+		System.out.println(list.size() +" <- list.size() CaahbookListByMonth.jsp");
+		System.out.println(y +" <- y CaahbookListByMonth.jsp");
+		System.out.println(m +" <- m CaahbookListByMonth.jsp");
 		
-		System.out.println(startBlank +" <- startBlank CaahBookListByMonth.jsp");
-		System.out.println(endDay +" <- endDay CaahBookListByMonth.jsp");
-		System.out.println(endBlank +" <- endBlank CaahBookListByMonth.jsp");
-		System.out.println(totalTd +" <- totalTd CaahBookListByMonth.jsp");
+		System.out.println(startBlank +" <- startBlank CaahbookListByMonth.jsp");
+		System.out.println(endDay +" <- endDay CaahbookListByMonth.jsp");
+		System.out.println(endBlank +" <- endBlank CaahbookListByMonth.jsp");
+		System.out.println(totalTd +" <- totalTd CaahbookListByMonth.jsp");
 	%>
 	<h2><%=y%>년 <%=m%>월</h2>
 	<div>
-		<a href="<%=request.getContextPath()%>/CashBookListByMonthController?y=<%=y%>&m=<%=m-1%>">이전달</a>
-		<a href="<%=request.getContextPath()%>/CashBookListByMonthController?y=<%=y%>&m=<%=m+1%>">다음달</a>
+		<a href="<%=request.getContextPath()%>/CashbookListByMonthController?y=<%=y%>&m=<%=m-1%>">이전달</a>
+		<a href="<%=request.getContextPath()%>/CashbookListByMonthController?y=<%=y%>&m=<%=m+1%>">다음달</a>
 	</div>
 	<!-- 
 		1) 이번날 1일의 요일 firstDayYoil -> startBlank -> 일 0, 월 1, 화 2, ... 토 6
@@ -74,7 +74,7 @@
 				%>
 							<td class="<%=c%>">
 								<%=i-startBlank%>
-								<a href="<%=request.getContextPath()%>/InsertCashBookController?y=<%=y%>&m=<%=m%>&d=<%=i-startBlank%>" class="btn btn-light">입력</a>
+								<a href="<%=request.getContextPath()%>/InsertCashbookController?y=<%=y%>&m=<%=m%>&d=<%=i-startBlank%>" class="btn btn-light">입력</a>
 								<div>
 									<%
 										// 해당 날짜의 cashbook 목록 출력
@@ -82,9 +82,11 @@
 											if((Integer)map.get("day") == (i-startBlank)) {
 									%>
 												<div>
-													[<%=map.get("kind")%>] 
-													<%=map.get("cash")%>원
-													<%=map.get("memo")%>...
+													<a href="<%=request.getContextPath()%>/CashbookOneController?cashbookNo=<%=map.get("cashbookNo")%>">
+														[<%=map.get("kind")%>] 
+														<%=map.get("cash")%>원
+														<%=map.get("memo")%>...
+													</a>
 												</div>
 									<%			
 											}
