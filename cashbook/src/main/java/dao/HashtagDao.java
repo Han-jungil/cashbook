@@ -132,7 +132,7 @@ public class HashtagDao {
 			 */
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
-			String sql = "SELECT h.tag, c.cashbook_no cashbookNo, c.cash, c.kind, c.memo, c.cash_date cashDate "
+			String sql = "SELECT h.tag, c.cashbook_no cashbookNo, c.cash cash, c.kind, c.memo, c.cash_date cashDate "
 					+ "				FROM hashtag h "
 					+ "				INNER JOIN cashbook c "
 					+ "				ON h.cashbook_no = c.cashbook_no "
@@ -144,6 +144,7 @@ public class HashtagDao {
 			if(rs.next())  {
 				map.put("tag", rs.getString("tag"));
 				map.put("cashbookNo", rs.getInt("cashbookNo"));
+				map.put("cash", rs.getInt("cash"));
 				map.put("kind", rs.getString("kind"));
 				map.put("memo", rs.getString("memo"));
 				map.put("cashDate", rs.getString("cashDate"));

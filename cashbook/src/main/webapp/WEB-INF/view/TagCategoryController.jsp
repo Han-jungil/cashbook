@@ -42,6 +42,10 @@
 			<td><%=map.get("kind")%></td>
 		</tr>
 		<tr>
+			<td>cash<td>
+			<td><%=map.get("cash")%>원</td>
+		</tr>
+		<tr>
 			<td>memo<td>
 			<td><%=map.get("memo") %></td>
 		</tr>
