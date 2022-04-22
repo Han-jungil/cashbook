@@ -1,4 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+	if(sessionMemberId == null) {
+	   // 로그인 되지 않은 경우
+	   response.sendRedirect(request.getContextPath()+"/LoginController");
+	   return;
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +16,10 @@
 </head>
 <body>
 	<div class="container">	
+	<div>
+		<a href= "<%=request.getContextPath()%>/SelectMemberOneController"><%=session.getAttribute("sessionMemberId") %></a>님 반갑습니다.
+		<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
+	</div>
 	<h1>일정 입력</h1>
 	<form method="post" action= "<%=request.getContextPath()%>/InsertCashbookController">
 		<table class="table">

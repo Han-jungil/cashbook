@@ -14,8 +14,16 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body class="container">
+<body>
+<div class="container">
 	<%
+		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+	    if(sessionMemberId == null) {
+	       // 로그인 되지 않은 경우
+	       response.sendRedirect(request.getContextPath()+"/LoginController");
+	       return;
+	    }
+	    
 		List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute("list");
 		int y = (Integer)request.getAttribute("y");
 		int m = (Integer)request.getAttribute("m");
@@ -34,6 +42,10 @@
 		System.out.println(endBlank +" <- endBlank CaahbookListByMonth.jsp");
 		System.out.println(totalTd +" <- totalTd CaahbookListByMonth.jsp");
 	%>
+	<div>
+		<a href= "<%=request.getContextPath()%>/SelectMemberOneController"><%=session.getAttribute("sessionMemberId") %></a>님 반갑습니다.
+		<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
+	</div>
 	<h2><%=y%>년 <%=m%>월</h2>
 	<div>
 		<div><a href="<%=request.getContextPath()%>/TagController">tag rank</a></div>
@@ -49,7 +61,7 @@
 		5) 가계부 list
 		6) 오늘 날짜
 	-->
-	<table class="table table-bordered table-striped">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>일</th>
@@ -111,5 +123,6 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
 </body>
 </html>

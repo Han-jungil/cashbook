@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" %>
 <%
+	String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+	if(sessionMemberId == null) {
+	   // 로그인 되지 않은 경우
+	   response.sendRedirect(request.getContextPath()+"/LoginController");
+	   return;
+	}
+	
 	Cashbook cashbook = (Cashbook)request.getAttribute("cashbook");
 %>
 <!DOCTYPE html>
@@ -12,6 +19,10 @@
 </head>
 <body>
 <div class="container">
+	<div>
+		<a href= "<%=request.getContextPath()%>/SelectMemberOneControllerSelectMemberOneController"><%=session.getAttribute("sessionMemberId") %></a>님 반갑습니다.
+		<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
+	</div>
 	<h1>일정 상세보기</h1>
 	<table class = "table">
 		<tr>

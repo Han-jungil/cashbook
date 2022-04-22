@@ -203,14 +203,19 @@ public class CashbookDao {
 			
 			// Hashtag를 저장하는 코드 (수정해야함)
 			PreparedStatement stmt2 = null;
-				for(String h : hashtag) {
-					String sql2 = "INSERT INTO hashtag(cashbook_no, tag, create_date) VALUES(?, ?, NOW())";
-					stmt2 = conn.prepareStatement(sql2);
-					stmt2.setInt(1, cashbookNo);
-					stmt2.setString(2, h);
-					stmt2.executeUpdate();
-				}
-			
+			String deleteHashtagSql = "DELETE FROM hashtag WHERE cashbook_no=? ";
+			stmt2=conn.prepareStatement(deleteHashtagSql);
+			stmt2.setInt(1, cashbook.getCashbookNo());
+			stmt2.executeUpdate(); //hashtag delect 요청
+			//2.hashtag table에 새로 태그 저장
+			PreparedStatement stmt3 = null;
+			for(String h : hashtag) {// hashtag만큼 반복해서 insert
+				String insertHashtagSql = "INSERT INTO hashtag(cashBook_no,tag,create_date) VALUES (?,?,NOW())";
+				stmt3= conn.prepareStatement(insertHashtagSql);
+				stmt3.setInt(1, cashbook.getCashbookNo());
+				stmt3.setString(2, h);
+				stmt3.executeUpdate();
+			}
 			conn.commit();
 		} catch (Exception e) {
 			try {

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import vo.*;
 import dao.*;
@@ -18,7 +19,16 @@ import dao.*;
  */
 @WebServlet("/InsertCashbookController")
 public class InsertCashbookController extends HttpServlet {
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// 접속허가체크
+	HttpSession session = request.getSession();
+	String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+	if(sessionMemberId == null) {
+		// 이미 로그인이 되어 있는 상태라면
+		response.sendRedirect(request.getContextPath()+"/LoginController");
+		return;
+	}	
 		request.setCharacterEncoding("utf-8");
 		String y = request.getParameter("y");
 		String m = request.getParameter("m");

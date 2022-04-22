@@ -6,37 +6,51 @@
 <head>
 <meta charset="UTF-8">
 <title>TagCategoryController</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
 <%
-	HashMap<String,Object> map = (HashMap<String,Object>)request.getAttribute("tagCategory");
+	String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+	if(sessionMemberId == null) {
+	   // 로그인 되지 않은 경우
+	   response.sendRedirect(request.getContextPath()+"/LoginController");
+	   return;
+	}
 	
+	Map<String,Object> map = (Map<String,Object>)request.getAttribute("list");
+	System.out.println("TagCategoryController.jsp listSize : " + map.size());
 	
 %>
-	<h1>tagOne</h1>
-	<table border="1">
+<div class="container">
+	<div>
+		<a href= "<%=request.getContextPath()%>/SelectMemberOneController"><%=session.getAttribute("sessionMemberId") %></a>님 반갑습니다.
+		<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
+	</div>
+	<h2>tagOne</h2>
+	<table border="2" class="table table-hover">
 	
-<%-- 		<tr>
+		<tr>
 			<td>tag<td>
-			<td><%=tagCategory.getTag()%></td>
-		</tr --%>>
+			<td><%=map.get("tag")%></td>
+		</tr >
 		<tr>
 			<td>categoryNo<td>
-			<td><%=map.get("cashbookNo") %></td>
+			<td><%=map.get("cashbookNo")%></td>
 		</tr>
-<%-- 		<tr>
+		<tr>
 			<td>kind<td>
-			<td><%=tagCategory.getKind() %></td>
+			<td><%=map.get("kind")%></td>
 		</tr>
 		<tr>
 			<td>memo<td>
-			<td><%=tagCategory.getMemo() %></td>
+			<td><%=map.get("memo") %></td>
 		</tr>
 		<tr>
 			<td>cashDate<td>
-			<td><%=tagCategory.getCashDate() %></td>
-		</tr> --%>
+			<td><%=map.get("cashDate") %></td>
+		</tr> 
 	</table>
-	<a href="<%=request.getContextPath()%>/TagController">tag rank로 돌아가기</a>
+	<a class="btn btn-dark" href="<%=request.getContextPath()%>/TagController">tag rank로 돌아가기</a>
+</div>
 </body>
 </html>

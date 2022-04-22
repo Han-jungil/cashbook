@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.HashtagDao;
 
@@ -17,8 +18,16 @@ import dao.HashtagDao;
  */
 @WebServlet("/TagKindDateController")
 public class TagKindDateController extends HttpServlet {
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// 접속허가체크
+	HttpSession session = request.getSession();
+	String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+	if(sessionMemberId == null) {
+		// 이미 로그인이 되어 있는 상태라면
+		response.sendRedirect(request.getContextPath()+"/LoginController");
+		return;
+	}
+		
 	request.setCharacterEncoding("utf-8");
 	// 요청값 분석(C)
 	String startDate = request.getParameter("startDate");

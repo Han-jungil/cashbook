@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CashbookDao;
 
@@ -13,6 +14,14 @@ import dao.CashbookDao;
 @WebServlet("/DeleteCashbookController")
 public class DeleteCashbookController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 접속허가체크
+		HttpSession session = request.getSession();
+		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+		if(sessionMemberId == null) {
+			// 이미 로그인이 되어 있는 상태라면
+			response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}
 		request.setCharacterEncoding("utf-8");
 		// 요청값 분석(c)
 		int cashbookNo = Integer.parseInt(request.getParameter("cashbookNo"));

@@ -1,15 +1,12 @@
 package dao;
 
 import java.util.*;
-
-import vo.TagCategory;
-
 import java.sql.*;
 
 public class HashtagDao {
 	// tagRankList
 	public List<Map<String,Object>> selectTagRankList() {
-		List<Map<String,Object>> list = new ArrayList<>();
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -23,15 +20,18 @@ public class HashtagDao {
 			 */
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
-			String sql = "SELECT t.tag, t.cnt, RANK() over(ORDER BY t.cnt DESC) rank"
-					+ "				FROM"
-					+ "				(SELECT tag, COUNT(*) cnt"
-					+ "				FROM hashtag"
-					+ "				GROUP BY tag) t";
+			String sql = "SELECT t.tag, t.cnt, RANK() over(ORDER BY t.cnt DESC) RANK , t.cashbookNo "
+					+ "FROM "
+					+ "(SELECT tag, COUNT(*) cnt, c.cashbook_no cashbookNo "
+					+ "FROM hashtag h  "
+					+ "INNER JOIN cashbook c "
+					+ "ON h.cashbook_no = c.cashbook_no "
+					+ "GROUP BY tag) t";
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
-				Map<String, Object> map = new HashMap<>();
+				Map<String,Object> map = new HashMap <String,Object>();
+				map.put("cashbookNo", rs.getInt("cashbookNo"));
 				map.put("tag", rs.getString("tag"));
 				map.put("cnt", rs.getInt("t.cnt"));
 				map.put("rank", rs.getInt("rank"));
@@ -142,7 +142,11 @@ public class HashtagDao {
 			stmt.setInt(2, cashbookNo);
 			rs = stmt.executeQuery();
 			if(rs.next())  {
+				map.put("tag", rs.getString("tag"));
 				map.put("cashbookNo", rs.getInt("cashbookNo"));
+				map.put("kind", rs.getString("kind"));
+				map.put("memo", rs.getString("memo"));
+				map.put("cashDate", rs.getString("cashDate"));
 			}
 			
 		} catch (Exception e) {

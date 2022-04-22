@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.HashtagDao;
-import vo.TagCategory;
 
 /**
  * Servlet implementation class TagCategoryController
@@ -30,12 +29,11 @@ public class TagCategoryController extends HttpServlet {
 		
 		// 메서드 실행 모델값 출력(M)
 		HashtagDao hashtagDao = new HashtagDao();
-		TagCategory tagCategory = new TagCategory();
-		HashMap<String, Object> map = hashtagDao.selectTagCategoryList(cashbookNo, tag);
-		request.setAttribute("map", map);
+		Map<String,Object> list = hashtagDao.selectTagCategoryList(cashbookNo, tag);
+		request.setAttribute("list", list);
 		
 		// 디버깅
-		System.out.println("완료");
+		System.out.println("TagCategoryController listSize : " + list.size());
 		
 		// 원래있던곳으로 돌아가기(뷰로 돌아가기(V))
 		request.getRequestDispatcher("/WEB-INF/view/TagCategoryController.jsp").forward(request, response);

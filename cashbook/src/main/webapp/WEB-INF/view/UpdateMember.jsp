@@ -10,51 +10,48 @@
 	
 	request.setCharacterEncoding("utf-8");
 	// 뷰에 입력하기위해 요청값 넣기
-	Cashbook cashbook = new Cashbook();
-	cashbook = (Cashbook)request.getAttribute("cashbook");	
+	Member member = new Member();
+	member = (Member)request.getAttribute("member");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UpdateCashbookController</title>
+<title>CashbookOneController</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container">
 	<div>
 		<a href= "<%=request.getContextPath()%>/SelectMemberOneController"><%=session.getAttribute("sessionMemberId") %></a>님 반갑습니다.
 		<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
 	</div>
-	<div class="container">
-	<h1>일정 수정</h1>
-	<form method="post" action="<%=request.getContextPath()%>/UpdateCashbookController">
+	<h1>회원 수정</h1>
+	<form method="post" action="<%=request.getContextPath()%>/UpdateMemberController">
 		<table class="table">
 			<tr>
-				<td>cashbookNo</td>
-				<td><input type="text" name="cashbookNo" value="<%=cashbook.getCashbookNo()%>" readonly="readonly"></td>
-			</tr>
-						<tr>	
-				<td>cashDate</td>
-				<td><input type="date" name="cashDate" class="form-control">원래 날짜 : <%=cashbook.getCashDate() %></td>
+				<td>memberId</td>
+				<td><input type="text" name="memberId" value="<%=member.getMemberId()%>"></td>
 			</tr>
 			<tr>
-				<td>kind</td>
+				<td>(필수 입력)memberPw</td>
+				<td><input type="password" name="memberPw"></td>
+			</tr>
+			<tr>	
+				<td>name</td>
+				<td><input type="text" name="name" class="form-control" value="<%=member.getName()%>"></td>
+			</tr>
+			<tr>
+				<td>gender</td>
+				<td><input type='radio' name='gender' value='남'>남
+				<input type='radio' name='gender' value='여'>여</td>
+			</tr>
+			<tr>
+				<td>age</td>
 				<td>
-					<select name="kind" class="form-select">
-							<option value="수입">수입</option>
-							<option value="지출">지출</option>
-					</select>
+					<input name="age" type="number" class="form-control" value="<%=member.getAge()%>">
 				</td>
 			</tr>
-			<tr>
-				<td>cash</td>
-				<td><input type="number" name="cash"  class="form-control" value=<%=cashbook.getCash()%>></td>
-			</tr>
-			<tr>
-				<td>memo</td>
-				<td>
-					<textarea rows="5" cols="50" name="memo" class="form-control"><%=cashbook.getMemo()%></textarea>
-				</td>
 		</table>
 		<button type="submit" class="btn btn-dark">수정</button>
 	</form>
