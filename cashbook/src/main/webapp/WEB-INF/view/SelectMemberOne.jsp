@@ -47,8 +47,9 @@
 		</tr>
 	</table>
 	<div class="btn-group">
-		<li class="page-item"><a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/UpdateMemberController?memberId=<%=member.getMemberId()%>&memberPw=<%=member.getMemberPw()%>&name=<%=member.getName()%>&gender=<%=member.getGender()%>&age=<%=member.getAge()%>">수정</a></li>&nbsp&nbsp&nbsp
-		<li class="page-item"><a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/DeleteMemberController?memberId=<%=member.getMemberId()%>">삭제</a></li>
+		<li class="page-item"><a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/CashbookListByMonthController">뒤로</a></li>&nbsp;&nbsp;
+		<li class="page-item"><a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/UpdateMemberController?memberId=<%=member.getMemberId()%>&memberPw=<%=member.getMemberPw()%>&name=<%=member.getName()%>&gender=<%=member.getGender()%>&age=<%=member.getAge()%>">회원수정</a></li>&nbsp&nbsp&nbsp
+		<li class="page-item"><a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/DeleteMemberController?memberId=<%=member.getMemberId()%>">회원탈퇴</a></li>
 	</div>
 </div>
 </body>

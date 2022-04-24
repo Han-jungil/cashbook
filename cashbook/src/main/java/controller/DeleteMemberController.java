@@ -49,21 +49,28 @@ public class DeleteMemberController extends HttpServlet {
 	String memberId = request.getParameter("memberId");
 	String memberPw = request.getParameter("memberPw");
 	
-	// 비번 틀릴경우 아뒤변경 안할경우
-	if(!memberPw.equals("1234") && memberId.equals("")) {
-		response.sendRedirect(request.getContextPath()+"/SelectMemberOneController");
-		return;
-	}
 	// 디버깅
-	System.out.println("DeleteMemberControllerBefore : " + memberId);
-	System.out.println("DeleteMemberControllerBefore : " + memberPw);
+	System.out.println("DeleteMemberController After : " + memberId);
+	System.out.println("DeleteMemberController After : " + memberPw);
 	
 	// 메서드 이용하여 모델값 구하기(M)
 	MemberDao memberDao = new MemberDao();
-	memberDao.deletMember(memberId, memberPw);
+	int row = memberDao.deletMember(memberId, memberPw);
+	System.out.println("탈퇴row " + row);
 	
-	// 뷰로 돌아가기
-	response.sendRedirect(request.getContextPath()+"/LogoutController");
-	}
+	// 뷰로 보내기
+	if (row==1) { //성공시 SelectMemberOnecontroller으로 돌려보냄
+        System.out.println("탈퇴성공");
+        response.sendRedirect(request.getContextPath()+"//LogController");
+        return;
+     }else if(row==0) {// row==0이면 영향받은 행이 없으므로 (row 기본값 -1), 비밀번호 오류
+        System.out.println("탈퇴실패");
+        response.sendRedirect(request.getContextPath()+"/UpdateMemberController?msg=fail");
+        
+     }else if (row==-1) {//row가 -1이면 sql이 작동 안함
+        System.out.println("탈퇴예외발생");
+        response.sendRedirect(request.getContextPath()+"/UpdateMemberController?msg=exception");
 
+	 }
+	}
 }

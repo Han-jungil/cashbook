@@ -36,7 +36,8 @@
 			</tr>
 			<tr>	
 		</table>
-		<button type="submit" class="btn btn-dark">삭제</button>
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/SelectMemberOneController">뒤로</a>
+		<button type="submit" class="btn btn-dark">탈퇴</button>
 	</form>
 </div>
 </body>

@@ -20,7 +20,7 @@ public class HashtagDao {
 			 */
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
-			String sql = "SELECT t.tag, t.cnt, RANK() over(ORDER BY t.cnt DESC) RANK , t.cashbookNo "
+			String sql = "SELECT t.tag, t.cnt, RANK() over(ORDER BY t.cnt DESC) RANK , t.cashbookNo  "
 					+ "FROM "
 					+ "(SELECT tag, COUNT(*) cnt, c.cashbook_no cashbookNo "
 					+ "FROM hashtag h  "

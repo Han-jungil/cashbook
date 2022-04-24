@@ -56,6 +56,7 @@
 					<textarea rows="5" cols="50" name="memo" class="form-control"><%=cashbook.getMemo()%></textarea>
 				</td>
 		</table>
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/CashbookOneController?cashbookNo=<%=cashbook.getCashbookNo()%>">뒤로</a>
 		<button type="submit" class="btn btn-dark">수정</button>
 	</form>
 </div>

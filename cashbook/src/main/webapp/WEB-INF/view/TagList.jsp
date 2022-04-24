@@ -28,6 +28,11 @@
 	</div>
 	<h1>tag rank</h1>
 	<form method="post" action="<%=request.getContextPath()%>/TagKindDateController">
+			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/CashbookListByMonthController">뒤로</a>
+			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/TagController">tag rank다시보기</a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<td>kind : </td>
 			<select class="form-select" name="kind">
 				<option value="">전체</option>
@@ -39,6 +44,7 @@
 			<td>~</td>
 			<input type="date" name="endDate" value=<%=sf.format(nowTime)%>></input>
 			<td><button  class="btn btn-dark" type="submit">검색</button></td>
+			
 	</form>
 	<table border="2" class="table table-hover">
 		<tr>
@@ -61,7 +67,7 @@
 					<%
 						} else {
 					%>
-							<td></td>
+							<td>랭크는 나오지 않습니다.</td>
 					<%
 						}
 					%>

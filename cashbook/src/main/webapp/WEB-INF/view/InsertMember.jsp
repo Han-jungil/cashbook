@@ -42,6 +42,7 @@
 			</tr>
 			<tr>
 				<td>
+					<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/LoginController">뒤로</a>
 					<button type="submit" class="btn-dark">가입</button>
 				</td>
 			</tr>

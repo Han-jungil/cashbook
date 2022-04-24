@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,7 @@ public class UpdateMemberController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}
+	
 	// 요청값 분석(c)
 	request.setCharacterEncoding("utf-8");
 	String memberId = request.getParameter("memberId");
@@ -83,10 +85,22 @@ public class UpdateMemberController extends HttpServlet {
 	member.setAge(age);
 	
 	MemberDao memberDao = new MemberDao();
-	memberDao.updateMemberController(member);
+	int row = memberDao.updateMemberController(member);
+	System.out.println("수정row " + row);
 	
 	// 원래있던곳으로 돌아가기(뷰로 돌아가기)
-	response.sendRedirect(request.getContextPath()+"/SelectMemberOneController");
+	if (row==1) { //성공시 SelectMemberOnecontroller으로 돌려보냄
+        System.out.println("수정성공");
+        response.sendRedirect(request.getContextPath()+"/SelectMemberOneController");
+        return;
+     }else if(row==0) {// row==0이면 영향받은 행이 없으므로 (row 기본값 -1), 비밀번호 오류
+        System.out.println("수정실패");
+        response.sendRedirect(request.getContextPath()+"/UpdateMemberController?msg=fail!!");
+        
+     }else if (row==-1) {//row가 -1이면 sql이 작동 안함
+        System.out.println("수정예외발생");
+        response.sendRedirect(request.getContextPath()+"/UpdateMemberController?msg=exception!!");
+     }
 	}
 
 }

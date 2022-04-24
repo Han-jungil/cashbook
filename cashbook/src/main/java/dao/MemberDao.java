@@ -43,7 +43,7 @@ public class MemberDao {
 		
 	}
 	// 회원수정
-		public void updateMemberController(Member member) {
+		public int updateMemberController(Member member) {
 		// 데이터베이스 자원 준비
 		int row = 0;
 		Connection conn = null;
@@ -75,10 +75,12 @@ public class MemberDao {
 		           e.printStackTrace();
 		        }
 		     }
+			return row;
 		}
 	// 회원탈퇴
-		public void deletMember(String memberId, String memberPw) {
-			int row = 0;
+		@SuppressWarnings("finally")
+		public int deletMember(String memberId, String memberPw) {
+			int row = -1;
 			Connection conn = null;
 			PreparedStatement stmt = null;
 			String sql = "DELETE From member where member_id = ? AND member_pw = PASSWORD(?)";
@@ -91,6 +93,7 @@ public class MemberDao {
 				stmt.setString(1, memberId);
 				stmt.setString(2, memberPw);
 				row = stmt.executeUpdate();
+				System.out.println(row);
 				if(row == 1) { // 디버깅
 					System.out.println("삭제성공");
 				} else {
@@ -104,6 +107,7 @@ public class MemberDao {
 		        } catch (SQLException e) {
 		           e.printStackTrace();
 		        }
+		        return row;
 		     }
 			
 		}

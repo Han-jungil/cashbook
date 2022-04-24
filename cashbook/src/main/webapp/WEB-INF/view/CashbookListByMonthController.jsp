@@ -48,9 +48,9 @@
 	</div>
 	<h2><%=y%>년 <%=m%>월</h2>
 	<div>
-		<div><a href="<%=request.getContextPath()%>/TagController">tag rank</a></div>
-		<a href="<%=request.getContextPath()%>/CashbookListByMonthController?y=<%=y%>&m=<%=m-1%>">이전달</a>
-		<a href="<%=request.getContextPath()%>/CashbookListByMonthController?y=<%=y%>&m=<%=m+1%>">다음달</a>
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/TagController">tag rank</a>&nbsp;&nbsp;&nbsp;
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/CashbookListByMonthController?y=<%=y%>&m=<%=m-1%>">이전달</a>&nbsp;&nbsp;
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/CashbookListByMonthController?y=<%=y%>&m=<%=m+1%>">다음달</a>
 	</div>
 	<!-- 
 		1) 이번날 1일의 요일 firstDayYoil -> startBlank -> 일 0, 월 1, 화 2, ... 토 6

@@ -55,6 +55,7 @@
 		</tr>
 	</table>
 	<div class="btn-group">
+		<li class="page-item"><a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/CashbookListByMonthController">뒤로</a></li>
 		<li class="page-item"><a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/UpdateCashbookController?cashbookNo=<%=cashbook.getCashbookNo()%>&cashDate=<%=cashbook.getCashDate()%>&kind=<%=cashbook.getKind()%>&cash=<%=cashbook.getCash()%>&memo=<%=cashbook.getMemo()%>">수정</a></li>&nbsp&nbsp&nbsp
 		<li class="page-item"><a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/DeleteCashbookController?cashbookNo=<%=cashbook.getCashbookNo()%>">삭제</a></li>
 	</div>

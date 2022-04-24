@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,10 +27,10 @@ public class SelectMemberOneController extends HttpServlet {
 			return;
 		}
 		System.out.println("SelectMemberOneControllersessionID: " + sessionMemberId);
-		
+
 		// 요청값 받기(c)
 		String memberId = sessionMemberId;
-		
+	
 		// 디버깅
 		System.out.println("SelectMemberOneControllerMermerID: " + memberId);
 		
@@ -44,9 +45,10 @@ public class SelectMemberOneController extends HttpServlet {
 		System.out.println(member.getName());
 		System.out.println(member.getGender());
 		System.out.println(member.getAge());
+		
 		// 뷰로 보낼준비
 		request.setAttribute("member", member);
-		
+
 		// 뷰 포워딩(c)
 		request.getRequestDispatcher("/WEB-INF/view/SelectMemberOne.jsp").forward(request, response);
 		

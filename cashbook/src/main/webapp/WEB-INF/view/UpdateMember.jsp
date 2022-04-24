@@ -53,6 +53,7 @@
 				</td>
 			</tr>
 		</table>
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/SelectMemberOneController">뒤로</a>
 		<button type="submit" class="btn btn-dark">수정</button>
 	</form>
 </div>
