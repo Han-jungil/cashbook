@@ -80,7 +80,7 @@ public class CashbookDao {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
 			conn.setAutoCommit(false); // 자동커밋을 해제
-			String sql ="insert into cashbook (cash_date, kind, cash, memo, update_date, create_date) VALUES (?, ?, ?, ?, NOW(), NOW());";
+			String sql ="insert into cashbook (cash_date, kind, cash, memo, update_date, create_date, member_id) VALUES (?, ?, ?, ?, NOW(), NOW(), ?);";
 			// insert + select 방금생선되 행의 키값 ex) select 방금입력한 cashbook_no를 from cashbook;
 			// 강사님이 찾아서 쓴것!(PreparedStatement.RETURN_GENERATED_KEYS)
 			stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -89,6 +89,7 @@ public class CashbookDao {
 			stmt.setString(2, cashbook.getKind());
 			stmt.setInt(3, cashbook.getCash());
 			stmt.setString(4, cashbook.getMemo());
+			stmt.setString(5, cashbook.getMemberId());
 			int row = stmt.executeUpdate();	// insert
 			if(row == 1) { // 디버깅
 				System.out.println("입력성공");
@@ -104,11 +105,16 @@ public class CashbookDao {
 			// Hashtag를 저장하는 코드
 			PreparedStatement stmt2 = null;
 			for(String h : hashtag) {
-				String sql2 = "INSERT INTO hashtag(cashbook_no, tag, create_date) VALUES(?, ?, NOW())";
+				String sql2 = "INSERT INTO hashtag(cashbook_no, tag, createDate) VALUES(?, ?, NOW())";
 				stmt2 = conn.prepareStatement(sql2);
 				stmt2.setInt(1, cashbookNo);
 				stmt2.setString(2, h);
-				stmt2.executeUpdate();
+				int row1 = stmt2.executeUpdate();
+				if(row1 == 1) { // 디버깅
+					System.out.println("입력성공");
+				} else {
+					System.out.println("입력실패");
+				}
 			}
 			
 			conn.commit();

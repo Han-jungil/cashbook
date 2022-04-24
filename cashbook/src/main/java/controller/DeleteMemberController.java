@@ -61,15 +61,15 @@ public class DeleteMemberController extends HttpServlet {
 	// 뷰로 보내기
 	if (row==1) { //성공시 SelectMemberOnecontroller으로 돌려보냄
         System.out.println("탈퇴성공");
-        response.sendRedirect(request.getContextPath()+"//LogController");
+        response.sendRedirect(request.getContextPath()+"//LogoutController");
         return;
      }else if(row==0) {// row==0이면 영향받은 행이 없으므로 (row 기본값 -1), 비밀번호 오류
         System.out.println("탈퇴실패");
-        response.sendRedirect(request.getContextPath()+"/UpdateMemberController?msg=fail");
+        response.sendRedirect(request.getContextPath()+"/UpdateMemberController");
         
      }else if (row==-1) {//row가 -1이면 sql이 작동 안함
         System.out.println("탈퇴예외발생");
-        response.sendRedirect(request.getContextPath()+"/UpdateMemberController?msg=exception");
+        response.sendRedirect(request.getContextPath()+"/UpdateMemberController");
 
 	 }
 	}

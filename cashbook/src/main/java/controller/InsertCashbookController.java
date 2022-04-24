@@ -43,8 +43,18 @@ public class InsertCashbookController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// 접속허가체크
+	HttpSession session = request.getSession();
+	String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+	if(sessionMemberId == null) {
+		// 이미 로그인이 되어 있는 상태라면
+		response.sendRedirect(request.getContextPath()+"/LoginController");
+		return;
+	}
+		
 	// 1) request 분석(C)
 	request.setCharacterEncoding("utf-8");
+	String memberId = sessionMemberId;
 	String cashbookDate = request.getParameter("cashbookDate");
 	int cash = Integer.parseInt(request.getParameter("cash"));
 	String kind = request.getParameter("kind");
@@ -52,6 +62,7 @@ public class InsertCashbookController extends HttpServlet {
 	
 	
 	// 디버깅
+	System.out.println(memberId);
 	System.out.println(cashbookDate);
 	System.out.println(cash);
 	System.out.println(kind);
@@ -60,6 +71,7 @@ public class InsertCashbookController extends HttpServlet {
 	// 2) 모델값 넣기
 	Cashbook cashbook = new Cashbook();
 	cashbook.setCashDate(cashbookDate);
+	cashbook.setMemberId(memberId);
 	cashbook.setCash(cash);
 	cashbook.setKind(kind);
 	cashbook.setMemo(memo);
