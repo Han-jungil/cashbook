@@ -104,7 +104,7 @@ public class MemberDao {
 				 try {
 						Class.forName("org.mariadb.jdbc.Driver");
 						conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
-						conn.setAutoCommit(false); // 오토커밋 X
+						conn.setAutoCommit(false);
 						
 						// cashbookNo 가져오기
 						stmt = conn.prepareStatement(sql);

@@ -28,7 +28,6 @@
 	</div>
 	<h2>tagOne</h2>
 	<table border="2" class="table table-hover">
-	
 		<tr>
 			<td>tag<td>
 			<td><%=map.get("tag")%></td>
