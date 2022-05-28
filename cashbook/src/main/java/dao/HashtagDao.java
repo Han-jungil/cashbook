@@ -162,4 +162,53 @@ public class HashtagDao {
 			
 		return map;
 	}
+	
+	// TagCategoryController
+		public List<HashMap<String, Object>> selectTagCategoryRankList(String tag) {
+			List<HashMap<String,Object>> list = new ArrayList<HashMap<String, Object>>();
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			try {
+				/*
+				 	SELECT h.tag, c.cashbook_no, c.cash, c.kind, c.memo, c.cash_date 
+					FROM hashtag h
+					INNER JOIN cashbook c
+					ON h.cashbook_no = c.cashbook_no
+					WHERE tag = ? AND c.cashbook_no = ?
+				 */
+				Class.forName("org.mariadb.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+				String sql = "SELECT h.tag tag, c.cashbook_no cashbookNo, c.cash cash, c.kind, c.memo, c.cash_date cashDate "
+						+ "				FROM hashtag h "
+						+ "				INNER JOIN cashbook c "
+						+ "				ON h.cashbook_no = c.cashbook_no "
+						+ "				WHERE tag = ?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, tag);
+				rs = stmt.executeQuery();
+				while(rs.next())  {
+					HashMap<String,Object> map = new HashMap<>();
+					map.put("tag", rs.getString("tag"));
+					map.put("cashbookNo", rs.getInt("cashbookNo"));
+					map.put("cash", rs.getInt("cash"));
+					map.put("kind", rs.getString("kind"));
+					map.put("memo", rs.getString("memo"));
+					map.put("cashDate", rs.getString("cashDate"));
+					list.add(map);
+				}
+				System.out.println("selectTagCategoryRankList list.size : " + list.size());
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} 
+				
+			return list;
+		}
 }
