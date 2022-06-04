@@ -19,7 +19,7 @@
 
 	List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute("list");
 	Date nowTime = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");	 // 오늘날짜 뽑아오기
 %>
 <div class="container">
 	<div>

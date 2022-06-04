@@ -43,6 +43,13 @@
 		System.out.println(totalTd +" <- totalTd CaahbookListByMonth.jsp");
 	%>
 	<div>
+		<div>
+		현재접속자 수 : ${currentCount}&nbsp;
+		오늘(${stats.day}) 접속자 수 : ${stats.cnt}&nbsp;
+		총 접속자 수 : ${totalCount}
+		</div>
+	</div>
+	<div>
 		<a href= "<%=request.getContextPath()%>/SelectMemberOneController"><%=session.getAttribute("sessionMemberId") %></a>님 반갑습니다.
 		<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
 	</div>

@@ -39,8 +39,7 @@ public class CashbookDao {
 				+ "		 WHERE YEAR(cash_date) = ? AND MONTH(cash_date) = ?"
 				+ "		 ORDER BY DAY(cash_date) ASC, kind ASC";
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, y);
 			stmt.setInt(2, m);
@@ -77,8 +76,7 @@ public class CashbookDao {
 	*/
 	
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
 			conn.setAutoCommit(false); // 자동커밋을 해제
 			String sql ="insert into cashbook (cash_date, kind, cash, memo, update_date, create_date, member_id) VALUES (?, ?, ?, ?, NOW(), NOW(), ?);";
 			// insert + select 방금생선되 행의 키값 ex) select 방금입력한 cashbook_no를 from cashbook;
@@ -144,9 +142,8 @@ public class CashbookDao {
 		String sql = "SELECT cashbook_no cashbookNo, cash_date cashDate, kind, cash, update_date updateDate, create_date createDate, memo FROM cashbook WHERE cashbook_no = ?";
 		try {
 			// 디비 접속
-			Class.forName("org.mariadb.jdbc.Driver");
 			System.out.println("드라이버 로딩 성공"); //디버깅
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, cashbookNo);
 			rs = stmt.executeQuery();
@@ -185,9 +182,8 @@ public class CashbookDao {
 		String sql = "UPDATE cashbook SET cash_date = ?, kind = ?, cash = ?, update_date = NOW(), memo = ?  WHERE cashbook_no = ?";
 		try {
 			// 디비 접속
-			Class.forName("org.mariadb.jdbc.Driver");
 			System.out.println("드라이버 로딩 성공"); //디버깅
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
 			conn.setAutoCommit(false); // 자동커밋을 해제
 			stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, cashbook.getCashDate());
@@ -250,9 +246,8 @@ public class CashbookDao {
 		String sql1 = "DELETE FROM hashtag WHERE cashbook_no=?";
 		try {
 			// 디비 접속
-			Class.forName("org.mariadb.jdbc.Driver");
 			System.out.println("드라이버 로딩 성공"); //디버깅
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
 			conn.setAutoCommit(false); // 자동커밋을 해제
 			// 태그
 			stmt1 = conn.prepareStatement(sql1);

@@ -18,8 +18,7 @@ public class HashtagDao {
 				FROM hashtag
 				GROUP BY tag) t
 			 */
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
 			String sql = "SELECT t.tag, t.cnt, RANK() over(ORDER BY t.cnt DESC) RANK , t.cashbookNo  "
 					+ "FROM "
 					+ "(SELECT tag, COUNT(*) cnt, c.cashbook_no cashbookNo "
@@ -63,8 +62,7 @@ public class HashtagDao {
 				ON h.cashbook_no = c.cashbook_no
 				where cash_date BETWEEN ? AND ?
 			 */
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
 			String sql = "SELECT t.tag tag, t.kind kind, t.cnt cnt, RANK() over(ORDER BY t.cnt DESC) RANK, t.cashbookNo cashbookNo "
 					+ "FROM "
 					+ "(SELECT c.cash_date cashDate, h.tag tag, c.kind kind, COUNT(*) cnt, c.cashbook_no cashbookNo "
@@ -130,8 +128,7 @@ public class HashtagDao {
 				ON h.cashbook_no = c.cashbook_no
 				WHERE tag = ? AND c.cashbook_no = ?
 			 */
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
 			String sql = "SELECT h.tag, c.cashbook_no cashbookNo, c.cash cash, c.kind, c.memo, c.cash_date cashDate "
 					+ "				FROM hashtag h "
 					+ "				INNER JOIN cashbook c "
@@ -177,8 +174,7 @@ public class HashtagDao {
 					ON h.cashbook_no = c.cashbook_no
 					WHERE tag = ? AND c.cashbook_no = ?
 				 */
-				Class.forName("org.mariadb.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+				conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
 				String sql = "SELECT h.tag tag, c.cashbook_no cashbookNo, c.cash cash, c.kind, c.memo, c.cash_date cashDate "
 						+ "				FROM hashtag h "
 						+ "				INNER JOIN cashbook c "

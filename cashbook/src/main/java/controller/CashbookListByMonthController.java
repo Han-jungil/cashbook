@@ -13,9 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CashbookDao;
+import dao.StatsDao;
+import vo.Stats;
 
 @WebServlet("/CashbookListByMonthController")
 public class CashbookListByMonthController extends HttpServlet {
+	private StatsDao statsDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 접속허가체크
 		
@@ -90,6 +93,18 @@ public class CashbookListByMonthController extends HttpServlet {
 		/*
 		 달력출력에 필요한 모델값(1), 2), 3), 4)) + 데이터베이스에서 반환된 모델값(list, y출력년도, m출력월) + 오늘날짜(today)
 		 */
+		
+		// 접속자수
+		this.statsDao = new StatsDao();
+		Stats stats = statsDao.selectStatsOneByNow();
+		int totalCount = statsDao.selectStatsTotalCount();
+		
+		System.out.println("stats : " + stats);
+		System.out.println("totalCount : " + totalCount);
+		
+		request.setAttribute("stats", stats);
+		request.setAttribute("totalCount", totalCount);
+
 		request.setAttribute("startBlank", startBlank);
 		request.setAttribute("endDay", endDay);
 		request.setAttribute("endBlank", endBlank);
