@@ -280,5 +280,36 @@ public class CashbookDao {
 		}
 	}
 	
+	public String selectStartDate() {
+		String startDate = "";
+		// 데이터베이스 자원 준비
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT date(cash_date) cashDate "
+				+ "FROM cashbook "
+				+ "ORDER BY cash_date ASC "
+				+ "LIMIT 1, 1";
+		try {
+			// 디비 접속
+			System.out.println("드라이버 로딩 성공"); //디버깅
+			conn = DriverManager.getConnection("jdbc:mariadb://3.39.254.208/cashbook","root","mariadb1234");
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				startDate = rs.getString("cashDate");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			}catch(SQLException e) {
+			e.printStackTrace();
+			}
+		}
+		return startDate;
+	}
+	
 }
 

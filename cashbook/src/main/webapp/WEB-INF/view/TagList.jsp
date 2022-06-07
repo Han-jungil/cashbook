@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +17,6 @@
 	}	
 
 	List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute("list");
-	Date nowTime = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");	 // 오늘날짜 뽑아오기
 %>
 <div class="container">
 	<div>
@@ -42,7 +39,7 @@
 			<td>Date : </td>
 			<input type="date" name="startDate"></input>
 			<td>~</td>
-			<input type="date" name="endDate" value=<%=sf.format(nowTime)%>></input>
+			<input type="date" name="endDate"></input>
 			<td><button  class="btn btn-dark" type="submit">검색</button></td>
 			
 	</form>
